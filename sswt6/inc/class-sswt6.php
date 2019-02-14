@@ -24,11 +24,8 @@ if ( ! class_exists( 'SSWT6' ) ) {
 		private function __construct() {
 			$this->load_shortcode();
 			$this->load_template();
-
-			if ( ! is_admin() ) { //these classes only used in front end
-				$this->load_assets();
-				$this->load_ajax();
-			}
+			$this->load_assets();
+			$this->load_ajax();
 		}
 
 		private function load_assets() {

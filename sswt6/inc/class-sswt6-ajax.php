@@ -26,8 +26,30 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 		}
 
 		private function register_ajax() {
+			add_action( 'wp_ajax_autocomple_search', array( $this, 'autocomple_search_callback' ) );
+			add_action( 'wp_ajax_nopriv_autocomple_search', array( $this, 'autocomple_search_callback' ) );
+
 			add_action( 'wp_ajax_search_posts', array( $this, 'search_posts_callback' ) );
 			add_action( 'wp_ajax_nopriv_search_posts', array( $this, 'search_posts_callback' ) );
+		}
+
+		function autocomple_search_callback() {
+			$q  = $_GET['q'];
+			$cb = $_GET['callback'];
+
+			$results      = array();
+			$qSearchPosts = new WP_Query( array(
+				'post_status' => 'publish',
+				's'           => $q
+			) );
+			if ( $qSearchPosts->have_posts() ):
+				while ( $qSearchPosts->have_posts() ) : $qSearchPosts->the_post();
+					$results[] = get_the_title();
+				endwhile;
+			endif;
+			wp_reset_query();
+			echo $cb . "(" . json_encode( $results ) . ")";
+			wp_die();
 		}
 
 		function search_posts_callback() {

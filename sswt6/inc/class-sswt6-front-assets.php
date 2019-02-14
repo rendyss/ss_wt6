@@ -33,7 +33,6 @@ if ( ! class_exists( 'SSWT6_FrontAssets' ) ) {
 		function assets_callback() {
 
 			//enqueu jquery ui's assets
-			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_style( 'jquery-ui-core', plugin_dir_url( __DIR__ ) . 'assets/css/jquery-ui.min.css' );
 
 			//enqueue bootstrap's assets
@@ -42,6 +41,8 @@ if ( ! class_exists( 'SSWT6_FrontAssets' ) ) {
 
 			//enqueu custom assets
 			wp_enqueue_style( 'custom', plugin_dir_url( __DIR__ ) . 'assets/css/custom.css' );
+			wp_enqueue_script( 'search', plugin_dir_url( __DIR__ ) . 'assets/js/search.js', array( 'jquery-ui-autocomplete' ), false, true );
+			wp_localize_script( 'search', 'objjs', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 		}
 	}
 }
