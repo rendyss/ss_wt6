@@ -6,9 +6,9 @@
  * Time: 2:51 PM
  */
 ?>
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Search for...">
-    <span class="input-group-btn">
+<form method="post" class="frm_sswt6">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
         <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
-    </span>
-</div>
+    </div>
+</form>
