@@ -16,7 +16,7 @@ if ( ! class_exists( 'SSWT6_Shortcode' ) ) {
 		static function init() {
 			static $instance = null;
 			if ( $instance === null ) {
-				$instance = new SSWT6_Shortcode();
+				$instance = new self();
 			}
 
 			return $instance;

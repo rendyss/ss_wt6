@@ -49,7 +49,7 @@ if ( ! class_exists( 'SSWT6_Template' ) ) {
 		 *
 		 * @return string
 		 */
-		function render( $suggestions, $variables = array() ) {
+		public function render( $suggestions, $variables = array() ) {
 			$template = $this->find_template( $suggestions );
 			$output   = '';
 			if ( $template ) {

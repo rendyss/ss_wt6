@@ -16,7 +16,7 @@ if ( ! class_exists( 'SSWT6_FrontAssets' ) ) {
 		static function init() {
 			static $instance = null;
 			if ( $instance === null ) {
-				$instance = new SSWT6_FrontAssets();
+				$instance = new self();
 			}
 
 			return $instance;

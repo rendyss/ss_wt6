@@ -15,7 +15,7 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 		static function init() {
 			static $instance = null;
 			if ( $instance === null ) {
-				$instance = new SSWT6_Ajax();
+				$instance = new self();
 			}
 
 			return $instance;
@@ -26,16 +26,15 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 		}
 
 		private function register_ajax() {
-			add_action( 'wp_ajax_autocomple_search', array( $this, 'autocomple_search_callback' ) );
-			add_action( 'wp_ajax_nopriv_autocomple_search', array( $this, 'autocomple_search_callback' ) );
+			add_action( 'wp_ajax_autocomplete_search', array( $this, 'autocomplete_search_callback' ) );
+			add_action( 'wp_ajax_nopriv_autocomplete_search', array( $this, 'autocomplete_search_callback' ) );
 
 			add_action( 'wp_ajax_search_posts', array( $this, 'search_posts_callback' ) );
 			add_action( 'wp_ajax_nopriv_search_posts', array( $this, 'search_posts_callback' ) );
 		}
 
-		function autocomple_search_callback() {
-			$q  = $_GET['q'];
-			$cb = $_GET['callback'];
+		function autocomplete_search_callback() {
+			$q = ! empty( $_GET['term'] ) ? $_GET['term'] : '';
 
 			$results      = array();
 			$qSearchPosts = new WP_Query( array(
@@ -50,13 +49,12 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 				endwhile;
 			endif;
 			wp_reset_query();
-			echo $cb . "(" . json_encode( $results ) . ")";
-			wp_die();
+			wp_send_json( $results );
 		}
 
 		function search_posts_callback() {
-			$qsearch       = $_GET['q'];
-			$paged         = $_GET['p'] ? $_GET['p'] : 1;
+			$qsearch       = ! empty( $_GET['q'] ) ? $_GET['q'] : '';
+			$paged         = ! empty( $_GET['p'] ) ? $_GET['p'] : 1;
 			$post_per_page = 5;
 			$results       = array();
 

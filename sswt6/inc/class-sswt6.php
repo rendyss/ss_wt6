@@ -15,7 +15,7 @@ if ( ! class_exists( 'SSWT6' ) ) {
 		static function init() {
 			static $instance = null;
 			if ( $instance === null ) {
-				$instance = new SSWT6();
+				$instance = new self();
 			}
 
 			return $instance;
@@ -32,7 +32,6 @@ if ( ! class_exists( 'SSWT6' ) ) {
 		private function load_assets() {
 			require_once plugin_dir_path( __DIR__ ) . 'inc/class-sswt6-front-assets.php';
 			SSWT6_FrontAssets::init();
-
 		}
 
 		private function load_shortcode() {

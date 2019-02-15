@@ -3,13 +3,11 @@ jQuery(function () {
 
     //Autocomplete
     $(".iss6").autocomplete({
-        source: function (req, response) {
-            $.getJSON(objjs.ajax_url + '?callback=?&action=autocomple_search', req, response);
-        },
+        source: objjs.ajax_url + '?action=autocomplete_search',
+        minLength: 3,
         select: function (event, ui) {
-            $(this).val(ui)
-        },
-        minLength: 3
+            $(this).val(ui);
+        }
     });
 
     //function to generate results
