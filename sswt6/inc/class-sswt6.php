@@ -26,6 +26,7 @@ if ( ! class_exists( 'SSWT6' ) ) {
 			$this->load_template();
 			$this->load_assets();
 			$this->load_ajax();
+			$this->load_functions();
 		}
 
 		private function load_assets() {
@@ -46,6 +47,10 @@ if ( ! class_exists( 'SSWT6' ) ) {
 
 		private function load_template() {
 			require_once plugin_dir_path( __DIR__ ) . 'inc/class-sswt6-template.php';
+		}
+
+		private function load_functions() {
+			require_once plugin_dir_path( __DIR__ ) . 'inc/sswt6-func.php';
 		}
 	}
 }

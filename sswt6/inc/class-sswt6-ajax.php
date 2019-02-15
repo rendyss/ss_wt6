@@ -39,6 +39,7 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 
 			$results      = array();
 			$qSearchPosts = new WP_Query( array(
+				'post_type'   => 'post',
 				'post_status' => 'publish',
 				's'           => $q
 			) );
@@ -53,7 +54,37 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 		}
 
 		function search_posts_callback() {
+			$qsearch       = $_GET['q'];
+			$paged         = $_GET['p'] ? $_GET['p'] : 1;
+			$post_per_page = 2;
+			$results       = array();
 
+			if ( $qsearch ) { //make sure query search is not empty
+				$qSearchPosts = new WP_Query( array(
+					'post_type'      => 'post',
+					'post_status'    => 'publish',
+					'posts_per_page' => $post_per_page,
+					's'              => $qsearch,
+					'paged'          => $paged,
+				) );
+				if ( $qSearchPosts->have_posts() ):
+					global $ssWT6Temp;
+					$results['max_pages']  = $qSearchPosts->max_num_pages;
+					$results['total']      = $qSearchPosts->found_posts;
+					$results['paged']      = $paged;
+					$results['pagination'] = custom_pagination( $paged, $results['max_pages'], $post_per_page );
+					while ( $qSearchPosts->have_posts() ) : $qSearchPosts->the_post();
+						$results['items'][] = $ssWT6Temp->render( 'search-list', array(
+							'link'    => get_permalink(),
+							'title'   => get_the_title(),
+							'info'    => '<i class="fa fa-info-circle"></i> posted on ' . get_the_date() . ' by ' . get_the_author(),
+							'excerpt' => get_the_excerpt()
+						) );
+					endwhile;
+				endif;
+				wp_reset_query();
+			}
+			wp_send_json( $results );
 		}
 	}
 }

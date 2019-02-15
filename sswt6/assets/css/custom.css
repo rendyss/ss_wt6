@@ -1,8 +1,13 @@
+input[type=text] {
+    font-size: 14px;
+}
+
 .btn-search {
     background: #424242;
     border-radius: 0;
     color: #fff;
     border: 1px solid #1c1c1c;
+    font-size: 14px;
 }
 
 .btn-search:link, .btn-search:visited {
@@ -12,4 +17,81 @@
 .btn-search:active, .btn-search:hover {
     background: #1c1c1c;
     color: #fff;
+}
+
+.sresults {
+    padding: 20px 0;
+}
+
+.sresults .sitem {
+    border-bottom: 1px dotted #eee;
+}
+
+.sresults .sitem a.title {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.sresults .sitem span.info {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.sresults .sitem p.excerpt {
+    font-size: 14px;
+}
+
+.page-numbers {
+    padding: 10px 0;
+}
+
+.page-numbers li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.page-numbers li a, .page-numbers li span, .page-numbers li .page-numbers {
+    display: block;
+    min-width: 25px;
+    text-align: center;
+    padding: 0 5px;
+    line-height: 24px;
+    color: #777;
+    border-radius: 2px;
+}
+
+.page-numbers li a.current, .page-numbers li span.current, .page-numbers li .page-numbers.current {
+    color: #FFFFFF;
+    background-color: #FF9900;
+}
+
+.page-numbers li a:hover {
+    background-color: #E2E2E2;
+}
+
+.loading {
+    position: relative;
+    z-index: 1;
+}
+
+.loading:before, .loading:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(../image/loading.gif) no-repeat center;
+    background-size: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+
+.loading:before {
+    background: #FFF;
+    opacity: .8;
+    z-index: 2;
 }
