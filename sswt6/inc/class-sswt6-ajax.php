@@ -39,9 +39,10 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 
 			$results      = array();
 			$qSearchPosts = new WP_Query( array(
-				'post_type'   => 'post',
-				'post_status' => 'publish',
-				's'           => $q
+				'post_type'      => 'post',
+				'post_status'    => 'publish',
+				's'              => $q,
+				'posts_per_page' => 5
 			) );
 			if ( $qSearchPosts->have_posts() ):
 				while ( $qSearchPosts->have_posts() ) : $qSearchPosts->the_post();
@@ -56,7 +57,7 @@ if ( ! defined( 'SSWT6_Ajax' ) ) {
 		function search_posts_callback() {
 			$qsearch       = $_GET['q'];
 			$paged         = $_GET['p'] ? $_GET['p'] : 1;
-			$post_per_page = 2;
+			$post_per_page = 5;
 			$results       = array();
 
 			if ( $qsearch ) { //make sure query search is not empty
